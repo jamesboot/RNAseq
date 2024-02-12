@@ -18,6 +18,7 @@ library(biomaRt)
 library(data.table)
 library(EnhancedVolcano)
 library(ComplexHeatmap)
+library(fgsea)
 ```
 ### Process
 1. Download samples using SRA Toolkit using `sra-fastq-dump.sh`
