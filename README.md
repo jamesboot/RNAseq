@@ -1,7 +1,7 @@
 # RNAseq
 README last updated 12/02/2024
 ## 📝 Description
-- Scripts for bulk RNAseq analysis
+- *Example* scripts for bulk RNAseq analysis
 - Scripts in this project were run on published datasets with GEO accession numbers: GSE189053 and GSE159273
 - Results from this analysis are being published and are currently under review
 ## 🔩 Getting started
