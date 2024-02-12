@@ -16,6 +16,8 @@ library(tidyverse)
 library(gplots)
 library(biomaRt)
 library(data.table)
+library(EnhancedVolcano)
+library(ComplexHeatmap)
 ```
 ### Process
 1. Download samples using SRA Toolkit using `sra-fastq-dump.sh`
@@ -24,5 +26,6 @@ library(data.table)
    - This script should be run in the directory containing downloaded `.fastq` files.
 3. Align samples to reference genome using STAR aligner in `star-align.sh`
    - This script is run as an array - creating a job for each sample to parallelise the process
-   - This script requires a list of sample names in a `.txt` file as input an the folder containing `.fastq` files 
+   - This script requires a list of sample names in a `.txt` file as input an the folder containing `.fastq` files
+4. Perform exploratory analysis, differential expression analysis and pathway analysis, along with visualisations in R using `Analysis.R`
 
