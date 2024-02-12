@@ -1,6 +1,8 @@
 #!/bin/bash 
  
 # Script to download fastq files using SRA toolkit from NCBI
+# Author: James Boot, 21/08/2023
+# This script is designed to run on QMUL HPC
 
 ##### Set queue options
 #$ -M j.boot@qmul.ac.uk            # Change to your email address 
