@@ -1,7 +1,7 @@
 # Script for the analysis of Yung-Yao's bulk RNAseq data 
 
 # Setwd
-setwd('/Users/jamesboot/Documents/9.Genome Centre Files/YungYao_Analysis/')
+setwd('/Users/jamesboot/Documents/9.Genome Centre Files/RNAseq_Analysis/')
 
 # Load packages
 library(edgeR)
@@ -85,8 +85,6 @@ colnames(countMat) <-
 # Pre-processing done - ready to go 
 
 # Isolate just samples of interest
-# CORR-R3381X, DMD-R3381X, CORR-K2957fs, DMD-K2957fs
-
 # Find sample names of D0 samples we need
 R3381X_D0_Samps <- c("A_ctrl_0", "A_mut_0", "B_ctrl_0", "B_mut_0", "C_ctrl_0", "C_mut_0")
 K2957fs_D0_Samps <- SampleNameLookup$Real.Sample[grep('Day 0', SampleNameLookup$Real.Sample)]
@@ -383,7 +381,6 @@ Heatmap(zscores,
 dev.off()
 
 # Volcano plot of DEGs
-#BiocManager::install('EnhancedVolcano')
 library(EnhancedVolcano)
 degResTable <- read.csv('R_outs/DMD_v_CORR_DEGs.csv')
 EnhancedVolcano(degResTable,
