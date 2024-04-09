@@ -152,7 +152,8 @@ results <- data.frame(Gene = names(prelimRes),
 )
 
 # Extract FDR <0.05
-sigDEGs <- results$Gene[(results$FDR < 0.05)]
+sigDEGs <- results[(results$FDR < 0.05), ]
+sort(sigDEGs$FDR, decreasing = F)
 
 # Look at expression of results
 normCountMat[sigDEGs,]
@@ -166,8 +167,7 @@ design <- model.matrix(~Group)
 y <- estimateDisp(y,design)
 fit <- glmFit(y,design)
 lrt <- glmLRT(fit,coef=2)
-topTags(lrt)
-edgerDEGs <- row.names(lrt[["table"]])[lrt[["table"]]$PValue < 0.05]
+edgeR_res <- topTags(lrt, p.value = 0.05, n = 1000)[['table']]
 
 # Are sigDEGs all contains within EdgeR DEGs
 sigDEGs %in% edgerDEGs
