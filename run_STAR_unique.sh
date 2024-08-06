@@ -19,14 +19,15 @@
 # STARDIR does not have to exist - it will be made when the script runs
 # GENOME should be the full directory to the STAR index 
 # R1PATTERN and R2PATTERN should be a regular expression of the naming convention of read 1 and read 2
-ANALYSISDIR=/data/WHRI-GenomeCentre/shares/Projects/Bioinformatic/GC-HR-11016/Analysis/new_data
-TRIMDIR=${ANALYSISDIR}/2.trim_out
-STARDIR=${ANALYSISDIR}/3.STAR_unique_out
+ANALYSISDIR=
+TRIMDIR=${ANALYSISDIR}/trimgalore_out
+STARDIR=${ANALYSISDIR}/STAR_unique_out
 GENOME=
 FASTA=
 GTF=
 R1PATTERN=".*_1.fq.gz"
 R2PATTERN=".*_2.fq.gz"
+
 
 # User: Do not edit beyond this point
 
