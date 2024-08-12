@@ -1,32 +1,35 @@
 # RNAseq
-README last updated 12/02/2024
+
 ## 📝 Description
-- *Example* scripts for bulk RNAseq analysis
-- Scripts in this project were run on published datasets with GEO accession numbers: GSE189053 and GSE159273
-- Results from this analysis are being published and are currently under review
+- Scripts for bulk RNAseq analysis
+- Scripts in this repository have not been tested
+
 ## 🔩 Getting started
 ### Dependencies
-- SRA Toolkit
-- FastQC & MultiQC
-- STAR
-- Post-alignment analysis in R:
-```
-library(edgeR)
-library(tidyverse)
-library(gplots)
-library(biomaRt)
-library(data.table)
-library(EnhancedVolcano)
-library(ComplexHeatmap)
-library(fgsea)
-```
-### Process
-1. Download samples using SRA Toolkit using `sra-fastq-dump.sh`
-   - This script requires lists of sample accession numbers for files to download. Accession lists can be downloaded from NCBI SRA Run Selector.
-2. Perform initial QC using `fastqc.sh`
-   - This script should be run in the directory containing downloaded `.fastq` files.
-3. Align samples to reference genome using STAR aligner in `star-align.sh`
-   - This script is run as an array - creating a job for each sample to parallelise the process
-   - This script requires a list of sample names in a `.txt` file as input an the folder containing `.fastq` files
-4. Perform exploratory analysis, differential expression analysis and pathway analysis, along with visualisations in R using `Analysis.R`
+- conda environment with Squire installed is required
+- Use STAR installation available on Apocrita
+- Please see in all scripts for parameters that need to be added by the user - after the Apocrita queue options
 
+### Scripts
+
+1. run_QCandTrim.sh
+    - Trimming using trimgalore with FASTQC before and after trimming.
+    - ❗ NOTE: multiqc will need to be run manually after this - script needs to be added for this.
+    - See fastqc.sh script for another example 
+
+2. STAR
+    - Folder contains all STAR associated scripts
+    - run_STAR_index.sh
+        - If index is not already prepared
+    - run_STAR_unique.sh
+        - Alignment keeping only unique alignments.
+    - run_STAR_unique.sh
+        - Alignment keeping one random alignment.
+
+3. Squire
+    - Folder contains all Squire associated scripts
+    - Documentation: https://github.com/wyang17/SQuIRE
+    - squire_Map.sh
+        - Map reads using Squire
+    - suire_Count.sh
+        - Count reads using Squire
