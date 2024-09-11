@@ -19,5 +19,5 @@ export NXF_SINGULARITY_CACHEDIR=/flask/apps/misc/stp/babs/nf-core/singularity/
 # TEST PIPELINE
 nextflow run nf-core/rnaseq \
   --email james.boot@crick.ac.uk \
-  -profile test
+  -profile test,crick
 
