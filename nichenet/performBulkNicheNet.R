@@ -120,7 +120,7 @@ performBulkNicheNet <-
     order_targets <-
       active_ligand_target_links_df$target %>% unique() %>% intersect(rownames(active_ligand_target_links))
     # Only want stuff actually in the expression matrix 
-    order_targets <- order_targets %in% colnames(expressionMat)
+    order_targets <- order_targets[order_targets %in% colnames(expressionMat)]
     
     # Transpose the activeligand target links df
     vis_ligand_target <-
