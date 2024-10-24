@@ -233,9 +233,10 @@ performBulkNicheNet <-
     plot(p_ligand_receiver_expression)
     dev.off()
     
-    # Prepare expression of target genes
+    # Prepare expression of target genes (and order)
     expression_df_receiver <-
       expressionMat[c(ReceiverSamples), colnames(expressionMat) %in% order_targets]
+    expression_df_receiver <- expression_df_receiver[, order_targets]
     
     # Scale
     vis_target_receiver_expression_scaled <-
