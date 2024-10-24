@@ -119,6 +119,8 @@ performBulkNicheNet <-
                 colnames(active_ligand_target_links)) %>% rev()
     order_targets <-
       active_ligand_target_links_df$target %>% unique() %>% intersect(rownames(active_ligand_target_links))
+    # Only want stuff actually in the expression matrix 
+    order_targets <- order_targets %in% colnames(expressionMat)
     
     # Transpose the activeligand target links df
     vis_ligand_target <-
@@ -233,11 +235,9 @@ performBulkNicheNet <-
     plot(p_ligand_receiver_expression)
     dev.off()
     
-    # Prepare expression of target genes (and order)
-    #expression_df_receiver <-
-    #  expressionMat[c(ReceiverSamples), colnames(expressionMat) %in% order_targets]
+    # Prepare expression of target genes
     expression_df_receiver <-
-      expressionMat[c(ReceiverSamples), c(order_targets)]
+      expressionMat[c(ReceiverSamples), order_targets]
     
     # Scale
     vis_target_receiver_expression_scaled <-
