@@ -14,9 +14,6 @@ library(RColorBrewer)
 library(cowplot)
 library(ggpubr)
 
-# Source custom functions
-source('NicheNet_Funcs.R')
-
 # Prep - load everything according to nichenet vignette
 # https://github.com/saeyslab/nichenetr/blob/master/vignettes/ligand_activity_geneset.md
 organism <- "mouse"
@@ -97,6 +94,10 @@ meta$ID <- gsub('GIA7103', '', meta$ID)
 # If this is not done, there will be 35 genes fewer in lr_network_expressed!
 colnames(expression) <-
   convert_alias_to_symbols(colnames(expression), "mouse", verbose = T)
+
+# Source custom functions
+source('geneSelection.R')
+source('performBulkNicheNet.R')
 
 # 1. DMSO COCULTURE CAFS > COCULTURE CANCER
 
