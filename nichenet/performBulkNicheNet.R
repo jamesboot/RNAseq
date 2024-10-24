@@ -129,7 +129,7 @@ performBulkNicheNet <-
       make_heatmap_ggplot(
         vis_ligand_target,
         paste0("Prioritized ", SenderName, "-ligands"),
-        paste0("Hallmark genes in ", ReceiverName, " cells"),
+        paste0(geneSetName, " in ", ReceiverName, " cells"),
         color = "purple",
         legend_title = "Regulatory potential"
       ) +
