@@ -66,7 +66,26 @@ runGSEA <- function(DE_Table, pathways, min, max, saveRes, plotTop, compName, sa
       )
       plot(p)
       dev.off()
-      
+
+      topPathwaysUpRes <- res[ES > 0][head(order(padj), n = 20), ]
+      topPathwaysUpRes <- topPathwaysUpRes[order(topPathwaysUpRes$NES, decreasing = F), ]
+      topPathwaysUpRes$pathway <- factor(topPathwaysUpRes$pathway, levels = topPathwaysUpRes$pathway)
+      pdf(
+        file = paste0(saveDir, compName, '_bubble.pdf'),
+        height = 5,
+        width = 15
+      )
+      p <- ggplot(topPathwaysUpRes, aes(
+        x = NES,
+        y = pathway,
+        size = size,
+        color = padj
+      )) +
+        geom_point(alpha = 1) +
+        scale_colour_gradient(low = "red", high = "blue")
+      plot(p)
+      dev.off()
+
     }
     
     if (saveRes == T) {
