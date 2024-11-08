@@ -66,26 +66,36 @@ runGSEA <- function(DE_Table, pathways, min, max, saveRes, plotTop, compName, sa
       )
       plot(p)
       dev.off()
-
+      
+      # Get top upreg pathways
       topPathwaysUpRes <- res[ES > 0][head(order(padj), n = 20), ]
-      topPathwaysUpRes <- topPathwaysUpRes[order(topPathwaysUpRes$NES, decreasing = F), ]
-      topPathwaysUpRes$pathway <- factor(topPathwaysUpRes$pathway, levels = topPathwaysUpRes$pathway)
+      # Get top downreg pathways
+      topPathwaysDownRes <- res[ES < 0][head(order(padj), n = 20), ]
+      topPathwaysDownRes <- topPathwaysDownRes[order(topPathwaysDownRes$NES, decreasing = F), ]
+      # Bind together
+      topUpDownPaths <- rbind(topPathwaysUpRes, topPathwaysDownRes)
+      # Set order
+      topUpDownPaths <- topUpDownPaths[order(topUpDownPaths$NES, decreasing = F), ]
+      topUpDownPaths$pathway <- factor(topUpDownPaths$pathway, levels = topUpDownPaths$pathway)
+      
+      # Bubble plot
       pdf(
         file = paste0(saveDir, compName, '_bubble.pdf'),
         height = 5,
         width = 15
       )
-      p <- ggplot(topPathwaysUpRes, aes(
+      p <- ggplot(topUpDownPaths, aes(
         x = NES,
         y = pathway,
         size = size,
-        color = padj
+        fill = padj
       )) +
-        geom_point(alpha = 1) +
-        scale_colour_gradient(low = "red", high = "blue")
+        geom_point(alpha = 1, shape = 21) +
+        scale_fill_viridis_c(direction = -1,
+                             limits = c(min(topUpDownPaths$padj), 1))
       plot(p)
       dev.off()
-
+      
     }
     
     if (saveRes == T) {
