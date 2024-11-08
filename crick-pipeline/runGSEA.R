@@ -60,7 +60,7 @@ runGSEA <- function(DE_Table, pathways, min, max, saveRes, plotTop, compName, sa
       # Bubble plot
       pdf(
         file = paste0(saveDir, compName, '_bubble.pdf'),
-        height = 5,
+        height = 10,
         width = 15
       )
       p <- ggplot(topUpDownPaths, aes(
