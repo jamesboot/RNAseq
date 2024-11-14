@@ -53,9 +53,15 @@ runGSEA <- function(DE_Table, pathways, min, max, saveRes, plotTop, compName, sa
       topPathwaysDownRes <- topPathwaysDownRes[order(topPathwaysDownRes$NES, decreasing = F), ]
       # Bind together
       topUpDownPaths <- rbind(topPathwaysUpRes, topPathwaysDownRes)
+      # Create new column for significance
+      topUpDownPaths <- topUpDownPaths %>%
+        mutate(Significance = case_when(padj < 0.01 ~ "<0.01",
+                                        padj >= 0.01 & padj < 0.05 ~ "<0.05",
+                                        padj >= 0.05 ~ "NotSig"))
       # Set order
       topUpDownPaths <- topUpDownPaths[order(topUpDownPaths$NES, decreasing = F), ]
       topUpDownPaths$pathway <- factor(topUpDownPaths$pathway, levels = topUpDownPaths$pathway)
+      topUpDownPaths$Significance <- factor(topUpDownPaths$Significance, levels = c("<0.01", "<0.05", "NotSig"))
       
       # Bubble plot
       pdf(
@@ -67,11 +73,12 @@ runGSEA <- function(DE_Table, pathways, min, max, saveRes, plotTop, compName, sa
         x = NES,
         y = pathway,
         size = size,
-        fill = padj
+        fill = Significance
       )) +
-        geom_point(alpha = 1, shape = 21) +
-        scale_fill_viridis_c(direction = -1,
-                             limits = c(min(topUpDownPaths$padj), 1))
+        geom_point(alpha = 1, shape = 21, show.legend = T) +
+        scale_fill_viridis_d(direction = -1, 
+                             drop = F) +
+        guides(fill = guide_legend(override.aes = list(size = 5)))
       plot(p)
       dev.off()
       
