@@ -140,7 +140,7 @@ performBulkNicheNet <-
     pdf(
       file = paste0(outdir, '/ligand_target_network1.pdf'),
       height = 5,
-      width = 30
+      width = 10
     )
     plot(p_ligand_target_network)
     dev.off()
@@ -174,7 +174,7 @@ performBulkNicheNet <-
     pdf(
       file = paste0(outdir, '/ligand_target_network2.pdf'),
       height = 5,
-      width = 5
+      width = 10
     )
     plot(p_ligand_target_network2)
     dev.off()
@@ -259,7 +259,7 @@ performBulkNicheNet <-
     pdf(
       file = paste0(outdir, '/target_receiver_scaled_expression.pdf'),
       height = 5,
-      width = 30
+      width = 10
     )
     plot(p_target_receiver_scaled_expression)
     dev.off()
@@ -282,7 +282,7 @@ performBulkNicheNet <-
       nrow = 2,
       rel_widths = c(
         ncol(vis_ligand_aupr) + 20,
-        ncol(vis_ligand_receiver_expression) + 40,
+        ncol(vis_ligand_receiver_expression) + 20,
         ncol(vis_ligand_target)
       ) - 2,
       rel_heights = c(
@@ -311,7 +311,7 @@ performBulkNicheNet <-
     ggsave2(filename = paste0(outdir, '/panel_plot.pdf'),
             plot = p,
             height = 10,
-            width = 40)
+            width = 20)
     
     # pdf(
     #   file = paste0(outdir, '/panel_plot.pdf'),
