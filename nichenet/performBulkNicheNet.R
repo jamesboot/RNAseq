@@ -240,13 +240,13 @@ performBulkNicheNet <-
       expressionMat[c(ReceiverSamples), order_targets]
     
     # Scale
-    vis_target_receiver_expression_scaled <-
-      expression_df_receiver %>% scale_quantile()
+    #vis_target_receiver_expression_scaled <-
+    #  expression_df_receiver %>% scale_quantile()
     
     # Plot
     p_target_receiver_scaled_expression <-
       make_threecolor_heatmap_ggplot(
-        vis_target_receiver_expression_scaled,
+        expression_df_receiver,
         paste0(ReceiverName),
         "Target",
         low_color = color[1],
@@ -287,7 +287,7 @@ performBulkNicheNet <-
       ) - 2,
       rel_heights = c(
         nrow(vis_ligand_aupr),
-        nrow(vis_target_receiver_expression_scaled) + 3
+        nrow(expression_df_receiver) + 3
       )
     )
     
