@@ -90,6 +90,8 @@ performBulkNicheNet <-
     ligand_activities <-
       ligand_activities %>% arrange(-aupr_corrected) %>%
       mutate(rank = rank(desc(aupr_corrected)))
+    write.csv(ligand_activities,
+              file = paste0(outdir, '/ligand_activities.csv'))
     
     # See top ligands
     best_upstream_ligands <-
