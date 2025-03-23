@@ -39,13 +39,14 @@ geneExpressionLookup <- function(dat, exp, model, variable, goi, save.dir) {
     labs(y = paste(goi, 'Expression log(vst)'), x = variable) +
     guides(colour = "none") +
     geom_point(size = 5, alpha = 1) +
-    theme_bw(base_size = 18)
-  
+    theme_bw(base_size = 18) +
+    theme(axis.text.x = element_text(angle = 90, vjust = 1, hjust=1))
+
   # Save
   ggsave(
     filename = paste0(save.dir, '/', model, '_', goi, '.pdf'),
     units = 'in',
-    height = 5,
-    width = 5
+    height = 8,
+    width = 8
   )
 }
