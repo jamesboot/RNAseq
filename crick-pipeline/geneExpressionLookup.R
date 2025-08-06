@@ -44,9 +44,9 @@ geneExpressionLookup <- function(dat, exp, model, variable, goi, save.dir) {
 
   # Save
   ggsave(
-    filename = paste0(save.dir, '/', model, '_', goi, '.pdf'),
+    filename = paste0(save.dir, '/', model, '_', goi, '.png'),
     units = 'in',
     height = 8,
-    width = 8
+    width = 4
   )
 }

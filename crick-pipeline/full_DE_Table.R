@@ -1,8 +1,5 @@
 # Function to extract the full DEG results from DESeq2 obj
-full_DE_Table <- function(DESeqRDS) {
-  # Libraries
-  library(DESeq2)
-  library(openxlsx)
+full_DE_Table <- function(DESeqRDS, outdir) {
   
   # Load
   obj <- readRDS(DESeqRDS)
@@ -27,7 +24,7 @@ full_DE_Table <- function(DESeqRDS) {
       }
       saveWorkbook(
         wb,
-        file = paste(x, y, 'DEG_FullTable.xlsx', sep = '_'),
+        file = paste0(outdir, '/', paste(x, y, 'DEG_FullTable.xlsx', sep = '_')),
         overwrite = T
       )
     }

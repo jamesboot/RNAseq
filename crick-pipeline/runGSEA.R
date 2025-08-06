@@ -1,5 +1,5 @@
 # Define function for running GSEA
-runGSEA <- function(DE_Table, pathways, min, max, saveRes, plotTop, compName, saveDir) {
+runGSEA <- function(DE_Table, pathways, min, max, saveRes, plotTop, compName, saveDir, saveObj) {
   
   # Load packages
   library(DESeq2)
@@ -27,6 +27,12 @@ runGSEA <- function(DE_Table, pathways, min, max, saveRes, plotTop, compName, sa
     maxSize = max
   )
   
+  # Save RDS if asked
+  if (saveObj == T) {
+    saveRDS(res,
+            paste0(saveDir, compName, '.RDS'))
+  }
+  
   # Add control step for if no results are generated
   if (nrow(res) > 0) {
     
@@ -39,7 +45,7 @@ runGSEA <- function(DE_Table, pathways, min, max, saveRes, plotTop, compName, sa
       p <-
         plotGseaTable(pathways[topPathways], ranks, res, gseaParam = 0.5)
       pdf(
-        file = paste0(saveDir, compName, '.pdf'),
+        file = paste0(saveDir, compName, '.png'),
         height = 5,
         width = 15
       )
@@ -65,7 +71,7 @@ runGSEA <- function(DE_Table, pathways, min, max, saveRes, plotTop, compName, sa
       
       # Bubble plot
       pdf(
-        file = paste0(saveDir, compName, '_bubble.pdf'),
+        file = paste0(saveDir, compName, '_bubble.png'),
         height = 10,
         width = 15
       )
